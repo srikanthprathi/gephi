@@ -63,6 +63,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLReporter;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import javax.xml.XMLConstants;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
 import org.gephi.utils.CharsetToolkit;
 import org.openide.filesystems.FileObject;
@@ -150,6 +151,7 @@ public final class ImportUtils {
     public static Document getXMLDocument(InputStream stream) throws RuntimeException {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(stream);
             return document;
@@ -167,6 +169,7 @@ public final class ImportUtils {
     public static Document getXMLDocument(Reader reader) throws RuntimeException {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse(new InputSource(reader));
             return document;
